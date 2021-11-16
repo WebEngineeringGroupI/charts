@@ -1,0 +1,38 @@
+deployment:
+  # Number of replicas for the backend
+  replicas: 1
+
+image:
+  # Image repository
+  repository: ghcr.io/webengineeringgroupi/backend
+  # Image tag
+  tag: master
+  # Image Pull Policy (Always, IfNotPresent, Never)
+  pullPolicy: Always
+
+service:
+  # Type for the service of the backend
+  type: ClusterIP
+  # Port for the service
+  port: 80
+
+database:
+  # Whether to deploy or not the postgres database
+  deploy: true
+  # User for the database
+  postgresqlUsername:
+  # Password for the database
+  postgresqlPassword:
+  # Name of the database
+  postgresqlDatabase: postgres
+  # Service of the postgres database
+  postgresqlHost:
+  # SSL mode of the Postgres DB
+  ssl_mode: disable
+  service:
+    port: 5432
+
+integrations:
+  safebrowsing:
+    # API Key for the Google SafeBrowsing integration
+    apiKey:

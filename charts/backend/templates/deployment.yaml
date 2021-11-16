@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-backend
+  labels:
+    app: {{ .Release.Name }}-backend
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}-backend
+      labels:
+        app: {{ .Release.Name }}-backend
+    spec:
+      initContainers:
+        # TODO(fede): Simplify migration process by packaging the database scripts with the image
+        - name: migrate-db
+          image: docker.io/migrate/migrate:v4.15.1
+          imagePullPolicy: IfNotPresent
+          command: [ migrate ]
+          args:
+            - -source
+            - github://$(OWNER)/$(REPO)/$(MIGRATIONS_PATH)#$(REF)
+            - -database
+            - postgres://$(DB_USER):$(DB_PASS)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=$(DB_SSL_MODE)
+            - up
+          env:
+            - name: OWNER
+              value: WebEngineeringGroupI
+            - name: REPO
+              value: backend
+            - name: MIGRATIONS_PATH
+              value: database/migrate
+            - name: REF
+              value: {{ .Values.image.tag }}
+            - name: DB_PORT
+              value: {{ .Values.database.service.port | quote }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-backend-database
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-backend-database
+                  key: password
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_host
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_name
+            - name: DB_SSL_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_ssl_mode
+      containers:
+        - name: backend
+          ports:
+            - containerPort: 8080
+              name: http
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DB_PORT
+              value: {{ .Values.database.service.port | quote }}
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-backend-database
+                  key: username
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-backend-database
+                  key: password
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_host
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_name
+            - name: DB_SSL_MODE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: database_ssl_mode
+            - name: SAFE_BROWSING_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-google-safe-browsing
+                  key: apiKey
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-backend

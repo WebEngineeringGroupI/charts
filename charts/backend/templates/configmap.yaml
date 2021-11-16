@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-backend
+data:
+  database_host: {{ .Values.database.postgresqlHost | default (printf "%s-%s" .Release.Name "database") }}
+  database_name: {{ .Values.database.postgresqlDatabase }}
+  database_ssl_mode: {{ .Values.database.ssl_mode }} # (disable, allow, prefer, require, verify-ca, verify-full) https://www.postgresql.org/docs/9.1/libpq-ssl.html

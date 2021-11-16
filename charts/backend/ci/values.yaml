@@ -1,0 +1,6 @@
+database:
+  postgresqlPassword: passwd
+
+integrations:
+  safebrowsing:
+    apiKey: api-key
