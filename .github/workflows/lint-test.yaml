@@ -14,6 +14,11 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
 
+      - name: Install dependency repositories
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
