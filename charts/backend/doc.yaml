@@ -1,0 +1,21 @@
+project:
+  name: WebEngineering Backend
+  shortName: Backend
+  url: https://github.com/WebEngineeringGroupI/backend
+  description: This chart deploys the Web Engineering backend in your Kubernetes cluster.
+  app: the backend
+repository:
+  url: https://webengineeringgroupi.github.io/charts/
+  name: webeng
+chart:
+  name: backend
+  #  version: v0.9.0-rc.0
+  #  values: "-- generate from values file --"
+  valuesExample: "database.postgresqlPassword=YOUR-PASSWORD-HERE,integrations.safebrowsing.apiKey=YOUR-SAFEBROWSING-API-HERE"
+prerequisites:
+  - "Kubernetes v1.16+"
+  - "A Google SafeBrowsing API key"
+
+release:
+  name: backend
+  namespace: webeng-backend
