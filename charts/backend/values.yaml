@@ -20,9 +20,9 @@ database:
   # Whether to deploy or not the postgres database
   deploy: true
   # User for the database
-  postgresqlUsername:
+  postgresqlUsername: postgres
   # Password for the database
-  postgresqlPassword:
+  postgresqlPassword: ""
   # Name of the database
   postgresqlDatabase: postgres
   # Service of the postgres database
@@ -30,6 +30,7 @@ database:
   # SSL mode of the Postgres DB
   ssl_mode: disable
   service:
+    # Port of the database
     port: 5432
 
 integrations:

@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: generate_docs
+        pass_filenames: false
+        name: generate_docs
+        entry: make docs
+        language: system
+      - id: lint
+        pass_filenames: false
+        name: lint
+        entry: make lint
+        language: system
