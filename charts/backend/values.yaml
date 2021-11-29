@@ -11,10 +11,20 @@ image:
   pullPolicy: Always
 
 service:
-  # Type for the service of the backend
-  type: ClusterIP
-  # Port for the service
-  port: 80
+  http:
+    # Whether to create or not the HTTP service
+    create: true
+    # Type for the service for the HTTP backend
+    type: ClusterIP
+    # Port for the HTTP endpoint
+    port: 80
+  grpc:
+    # Whether to create or not the gRPC service
+    create: true
+    # Type of the service for the gRPC backend
+    type: ClusterIP
+    # Port for the gRPC endpoint
+    port: 80
 
 database:
   # Whether to deploy or not the postgres database
