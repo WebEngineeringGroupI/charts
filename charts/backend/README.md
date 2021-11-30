@@ -47,6 +47,7 @@ The following table lists the configurable parameters of the `backend` chart and
 
 |            Parameter             |                   Description                   |                Default                 |
 |----------------------------------|-------------------------------------------------|----------------------------------------|
+| base_hostname                    | Base hostname to apply to the URLs shortened    | `http://localhost:8080`                |
 | deployment.replicas              | Number of replicas for the backend              | `1`                                    |
 | image.repository                 | Image repository                                | `ghcr.io/webengineeringgroupi/backend` |
 | image.tag                        | Image tag                                       | `master`                               |

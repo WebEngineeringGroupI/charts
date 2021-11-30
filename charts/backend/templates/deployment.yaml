@@ -102,6 +102,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-google-safe-browsing
                   key: apiKey
+            - name: BASE_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-backend
+                  key: base_hostname
       restartPolicy: Always
   selector:
     matchLabels:

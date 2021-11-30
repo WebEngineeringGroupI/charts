@@ -1,3 +1,6 @@
+# Base hostname to apply to the URLs shortened
+base_hostname: http://localhost:8080
+
 deployment:
   # Number of replicas for the backend
   replicas: 1
