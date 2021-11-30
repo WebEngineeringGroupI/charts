@@ -50,3 +50,27 @@ integrations:
   safebrowsing:
     # API Key for the Google SafeBrowsing integration
     apiKey:
+
+ingress:
+  http:
+    # Whether to deploy the HTTP ingress or not
+    enabled: true
+    # Host setting for the HTTP ingress
+    host:
+    # Path to match for the HTTP ingress
+    path: /
+    # Type of path to match (Prefix, Exact)
+    pathType: Prefix
+    # Extra annotations for the HTTP ingress
+    extra_annotations: {}
+  grpc:
+    # Whether to deploy the gRPC ingress or not
+    enabled: true
+    # Host setting for the gRPC ingress
+    host:
+    # Path to match for the gRPC ingress
+    path: /
+    # Type of path to match (Prefix, Exact)
+    pathType: Prefix
+    # Extra annotations for the gRPC ingress
+    extra_annotations: {}
