@@ -10,6 +10,7 @@ spec:
   ports:
   - port: {{ .Values.service.http.port }}
     name: http
+    targetPort: 8080
   type: {{ .Values.service.http.type }}
   {{- end }}
   {{- if .Values.service.grpc.create }}
