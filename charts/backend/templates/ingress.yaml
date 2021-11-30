@@ -1,0 +1,44 @@
+{{- if .Values.ingress.http.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-http
+  {{- with .Values.ingress.http.extra_annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.http.host }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.http.path }}
+            pathType: {{ .Values.ingress.http.pathType }}
+            backend:
+              service:
+                name: {{ .Release.Name }}-http
+                port:
+                  name: http
+  {{- end }}
+  {{- if .Values.ingress.grpc.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-grpc
+  {{- with .Values.ingress.grpc.extra_annotations }}
+  annotations: {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.grpc.host }}
+      http:
+        paths:
+          - path: {{ .Values.ingress.grpc.path }}
+            pathType: {{ .Values.ingress.grpc.pathType }}
+            backend:
+              service:
+                name: {{ .Release.Name }}-grpc
+                port:
+                  name: grpc
+  {{- end }}

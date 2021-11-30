@@ -66,6 +66,16 @@ The following table lists the configurable parameters of the `backend` chart and
 | database.ssl_mode                | SSL mode of the Postgres DB                     | `disable`                              |
 | database.service.port            | Port of the database                            | `5432`                                 |
 | integrations.safebrowsing.apiKey | API Key for the Google SafeBrowsing integration | ``                                     |
+| ingress.http.enabled             | Whether to deploy the HTTP ingress or not       | `true`                                 |
+| ingress.http.host                | Host setting for the HTTP ingress               | ``                                     |
+| ingress.http.path                | Path to match for the HTTP ingress              | `/`                                    |
+| ingress.http.pathType            | Type of path to match (Prefix, Exact)           | `Prefix`                               |
+| ingress.http.extra_annotations   | Extra annotations for the HTTP ingress          | `{}`                                   |
+| ingress.grpc.enabled             | Whether to deploy the gRPC ingress or not       | `true`                                 |
+| ingress.grpc.host                | Host setting for the gRPC ingress               | ``                                     |
+| ingress.grpc.path                | Path to match for the gRPC ingress              | `/`                                    |
+| ingress.grpc.pathType            | Type of path to match (Prefix, Exact)           | `Prefix`                               |
+| ingress.grpc.extra_annotations   | Extra annotations for the gRPC ingress          | `{}`                                   |
 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
