@@ -63,6 +63,8 @@ ingress:
     pathType: Prefix
     # Extra annotations for the HTTP ingress
     extra_annotations: {}
+    # TLS configurations for the HTTP ingress
+    tls: []
   grpc:
     # Whether to deploy the gRPC ingress or not
     enabled: true
@@ -74,3 +76,5 @@ ingress:
     pathType: Prefix
     # Extra annotations for the gRPC ingress
     extra_annotations: {}
+    # TLS configurations for the gRPC ingress
+    tls: []
