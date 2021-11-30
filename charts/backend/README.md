@@ -54,10 +54,10 @@ The following table lists the configurable parameters of the `backend` chart and
 | image.pullPolicy                 | Image Pull Policy (Always, IfNotPresent, Never) | `Always`                               |
 | service.http.create              | Whether to create or not the HTTP service       | `true`                                 |
 | service.http.type                | Type for the service for the HTTP backend       | `ClusterIP`                            |
-| service.http.port                | Port for the HTTP endpoint                      | `80`                                   |
+| service.http.port                | Port for the HTTP endpoint                      | `8080`                                 |
 | service.grpc.create              | Whether to create or not the gRPC service       | `true`                                 |
 | service.grpc.type                | Type of the service for the gRPC backend        | `ClusterIP`                            |
-| service.grpc.port                | Port for the gRPC endpoint                      | `80`                                   |
+| service.grpc.port                | Port for the gRPC endpoint                      | `8081`                                 |
 | database.deploy                  | Whether to deploy or not the postgres database  | `true`                                 |
 | database.postgresqlUsername      | User for the database                           | `postgres`                             |
 | database.postgresqlPassword      | Password for the database                       | `""`                                   |
