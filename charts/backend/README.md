@@ -71,10 +71,12 @@ The following table lists the configurable parameters of the `backend` chart and
 | ingress.http.hosts               | Host setting for the HTTP ingress               | `[""]`                                                                                                                                                        |
 | ingress.http.paths               | Paths to match for the HTTP ingress             | `[{"path":"/","type":"Prefix"}]`                                                                                                                              |
 | ingress.http.extra_annotations   | Extra annotations for the HTTP ingress          | `{}`                                                                                                                                                          |
+| ingress.http.tls                 | TLS configurations for the HTTP ingress         | `[]`                                                                                                                                                          |
 | ingress.grpc.enabled             | Whether to deploy the gRPC ingress or not       | `true`                                                                                                                                                        |
 | ingress.grpc.hosts               | Host setting for the gRPC ingress               | `[""]`                                                                                                                                                        |
 | ingress.grpc.paths               | Paths to match for the gRPC ingress             | `[{"path":"/","type":"Prefix"}]`                                                                                                                              |
 | ingress.grpc.extra_annotations   | Extra annotations for the gRPC ingress          | `{}`                                                                                                                                                          |
+| ingress.grpc.tls                 | TLS configurations for the gRPC ingress         | `[]`                                                                                                                                                          |
 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
