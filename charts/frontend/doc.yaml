@@ -1,0 +1,20 @@
+project:
+  name: WebEngineering Frontend
+  shortName: Frontend
+  url: https://github.com/WebEngineeringGroupI/frontend
+  description: This chart deploys the Web Engineering frontend in your Kubernetes cluster.
+  app: the frontend
+repository:
+  url: https://webengineeringgroupi.github.io/charts/
+  name: webeng
+chart:
+  name: frontend
+  #  version: v0.9.0-rc.0
+  #  values: "-- generate from values file --"
+  #  valuesExample: ""
+prerequisites:
+  - "Kubernetes v1.16+"
+
+release:
+  name: frontend
+  namespace: webeng-frontend

@@ -1,0 +1,15 @@
+{{- if .Values.service.http.create }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-http
+spec:
+  selector:
+    app: {{ .Release.Name }}-backend
+  ports:
+  - port: {{ .Values.service.http.port }}
+    name: http
+    targetPort: http
+  type: {{ .Values.service.http.type }}
+{{- end }}
