@@ -156,6 +156,19 @@ entries:
   frontend:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2021-12-01T22:46:12.606548753Z"
+    description: Web Frontend for the Web Engineering Group I project
+    digest: cffd6002380834b200b2fa62e06662c27f8a6c871433907b345fdfb74117183d
+    maintainers:
+    - email: fede.barcelona@sysdig.com
+      name: tembleking
+    name: frontend
+    type: application
+    urls:
+    - https://github.com/WebEngineeringGroupI/charts/releases/download/frontend-0.0.2/frontend-0.0.2.tgz
+    version: 0.0.2
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2021-12-01T22:28:38.444360526Z"
     description: Web Frontend for the Web Engineering Group I project
     digest: 7b65d91213a1e2d3f272ef1671820687760d03ba5c17d9d3448c549b9f077a7c
@@ -167,4 +180,4 @@ entries:
     urls:
     - https://github.com/WebEngineeringGroupI/charts/releases/download/frontend-0.0.1/frontend-0.0.1.tgz
     version: 0.0.1
-generated: "2021-12-01T22:28:38.444396327Z"
+generated: "2021-12-01T22:46:12.606580154Z"
