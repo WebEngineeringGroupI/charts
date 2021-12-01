@@ -4,6 +4,13 @@ base_hostname: http://localhost:8080
 deployment:
   # Number of replicas for the backend
   replicas: 1
+  # Pod annotations
+  podAnnotations:  # +doc-gen:break
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"
+    prometheus.io/scheme: "http"
+    sidecar.istio.io/inject: "false"
 
 image:
   # Image repository
@@ -56,11 +63,12 @@ ingress:
     # Whether to deploy the HTTP ingress or not
     enabled: true
     # Host setting for the HTTP ingress
-    host:
-    # Path to match for the HTTP ingress
-    path: /
-    # Type of path to match (Prefix, Exact)
-    pathType: Prefix
+    hosts:  # +doc-gen:break
+      - ""
+    # Paths to match for the HTTP ingress
+    paths:  # +doc-gen:break
+      - path: /
+        type: Prefix
     # Extra annotations for the HTTP ingress
     extra_annotations: {}
     # TLS configurations for the HTTP ingress
@@ -69,11 +77,12 @@ ingress:
     # Whether to deploy the gRPC ingress or not
     enabled: true
     # Host setting for the gRPC ingress
-    host:
-    # Path to match for the gRPC ingress
-    path: /
-    # Type of path to match (Prefix, Exact)
-    pathType: Prefix
+    hosts:  # +doc-gen:break
+    - ""
+    # Paths to match for the gRPC ingress
+    paths:  # +doc-gen:break
+      - path: /
+        type: Prefix
     # Extra annotations for the gRPC ingress
     extra_annotations: {}
     # TLS configurations for the gRPC ingress

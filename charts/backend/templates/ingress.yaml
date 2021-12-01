@@ -1,4 +1,4 @@
-{{- if .Values.ingress.http.enabled }}
+{{- if (and .Values.ingress.http.enabled .Values.service.http.create)}}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -12,18 +12,22 @@ spec:
   tls: {{ toYaml . | nindent 4}}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.http.host }}
+    {{- range .Values.ingress.http.hosts }}
+    - host: {{ . }}
       http:
         paths:
-          - path: {{ .Values.ingress.http.path }}
-            pathType: {{ .Values.ingress.http.pathType }}
+          {{- range $.Values.ingress.http.paths }}
+          - path: {{ .path }}
+            pathType: {{ .type | default "Prefix" }}
             backend:
               service:
-                name: {{ .Release.Name }}-http
+                name: {{ $.Release.Name }}-http
                 port:
                   name: http
-  {{- end }}
-  {{- if .Values.ingress.grpc.enabled }}
+          {{- end }}
+    {{- end }}
+{{- end }}
+{{- if (and .Values.ingress.grpc.enabled .Values.service.grpc.create)}}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -37,14 +41,18 @@ spec:
   tls: {{ toYaml . | nindent 4}}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.grpc.host }}
+    {{- range .Values.ingress.grpc.hosts }}
+    - host: {{ . }}
       http:
         paths:
-          - path: {{ .Values.ingress.grpc.path }}
-            pathType: {{ .Values.ingress.grpc.pathType }}
+          {{- range $.Values.ingress.grpc.paths }}
+          - path: {{ .path }}
+            pathType: {{ .type | default "Prefix" }}
             backend:
               service:
-                name: {{ .Release.Name }}-grpc
+                name: {{ $.Release.Name }}-grpc
                 port:
                   name: grpc
-  {{- end }}
+          {{- end }}
+    {{- end }}
+{{- end }}
