@@ -6,7 +6,7 @@ metadata:
   name: {{ .Release.Name }}-http
 spec:
   selector:
-    app: {{ .Release.Name }}-backend
+    app: {{ .Release.Name }}-frontend
   ports:
   - port: {{ .Values.service.http.port }}
     name: http
