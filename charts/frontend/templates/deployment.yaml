@@ -19,6 +19,23 @@ spec:
               name: http
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /
+            initialDelaySeconds: 5
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
       restartPolicy: Always
   selector:
     matchLabels:
