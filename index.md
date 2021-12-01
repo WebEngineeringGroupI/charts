@@ -22,3 +22,8 @@ The following charts are available in the repository:
   ```console
   helm install backend webeng/backend
   ```
+- [frontend](https://github.com/WebEngineeringGroupI/charts/tree/master/charts/frontend): Deploys the frontend for the Web
+  Engineering Group I project.
+  ```console
+  helm install frontend webeng/frontend
+  ```
