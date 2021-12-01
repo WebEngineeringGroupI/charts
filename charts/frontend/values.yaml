@@ -1,0 +1,35 @@
+deployment:
+  # Number of replicas for the frontend
+  replicas: 1
+
+image:
+  # Image repository
+  repository: ghcr.io/webengineeringgroupi/frontend
+  # Image tag
+  tag: master
+  # Image Pull Policy (Always, IfNotPresent, Never)
+  pullPolicy: Always
+
+service:
+  http:
+    # Whether to create or not the HTTP service
+    create: true
+    # Type for the service for the HTTP frontend
+    type: ClusterIP
+    # Port for the HTTP endpoint
+    port: 80
+
+ingress:
+  # Whether to deploy the HTTP ingress or not
+  enabled: true
+  # Host setting for the HTTP ingress
+  hosts:  # +doc-gen:break
+    - ""
+  # Paths to match for the HTTP ingress
+  paths:  # +doc-gen:break
+    - path: /
+      type: Prefix
+  # Extra annotations for the HTTP ingress
+  extra_annotations: {}
+  # TLS configurations for the HTTP ingress
+  tls: []
