@@ -45,37 +45,36 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the `backend` chart and their default values.
 
-|            Parameter             |                   Description                   |                Default                 |
-|----------------------------------|-------------------------------------------------|----------------------------------------|
-| base_hostname                    | Base hostname to apply to the URLs shortened    | `http://localhost:8080`                |
-| deployment.replicas              | Number of replicas for the backend              | `1`                                    |
-| image.repository                 | Image repository                                | `ghcr.io/webengineeringgroupi/backend` |
-| image.tag                        | Image tag                                       | `master`                               |
-| image.pullPolicy                 | Image Pull Policy (Always, IfNotPresent, Never) | `Always`                               |
-| service.http.create              | Whether to create or not the HTTP service       | `true`                                 |
-| service.http.type                | Type for the service for the HTTP backend       | `ClusterIP`                            |
-| service.http.port                | Port for the HTTP endpoint                      | `8080`                                 |
-| service.grpc.create              | Whether to create or not the gRPC service       | `true`                                 |
-| service.grpc.type                | Type of the service for the gRPC backend        | `ClusterIP`                            |
-| service.grpc.port                | Port for the gRPC endpoint                      | `8081`                                 |
-| database.deploy                  | Whether to deploy or not the postgres database  | `true`                                 |
-| database.postgresqlUsername      | User for the database                           | `postgres`                             |
-| database.postgresqlPassword      | Password for the database                       | `""`                                   |
-| database.postgresqlDatabase      | Name of the database                            | `postgres`                             |
-| database.postgresqlHost          | Service of the postgres database                | ``                                     |
-| database.ssl_mode                | SSL mode of the Postgres DB                     | `disable`                              |
-| database.service.port            | Port of the database                            | `5432`                                 |
-| integrations.safebrowsing.apiKey | API Key for the Google SafeBrowsing integration | ``                                     |
-| ingress.http.enabled             | Whether to deploy the HTTP ingress or not       | `true`                                 |
-| ingress.http.host                | Host setting for the HTTP ingress               | ``                                     |
-| ingress.http.path                | Path to match for the HTTP ingress              | `/`                                    |
-| ingress.http.pathType            | Type of path to match (Prefix, Exact)           | `Prefix`                               |
-| ingress.http.extra_annotations   | Extra annotations for the HTTP ingress          | `{}`                                   |
-| ingress.grpc.enabled             | Whether to deploy the gRPC ingress or not       | `true`                                 |
-| ingress.grpc.host                | Host setting for the gRPC ingress               | ``                                     |
-| ingress.grpc.path                | Path to match for the gRPC ingress              | `/`                                    |
-| ingress.grpc.pathType            | Type of path to match (Prefix, Exact)           | `Prefix`                               |
-| ingress.grpc.extra_annotations   | Extra annotations for the gRPC ingress          | `{}`                                   |
+|            Parameter             |                   Description                   |                                                                            Default                                                                            |
+|----------------------------------|-------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| base_hostname                    | Base hostname to apply to the URLs shortened    | `http://localhost:8080`                                                                                                                                       |
+| deployment.replicas              | Number of replicas for the backend              | `1`                                                                                                                                                           |
+| deployment.podAnnotations        | Pod annotations                                 | `{"prometheus.io/path":"/metrics","prometheus.io/port":"8080","prometheus.io/scheme":"http","prometheus.io/scrape":"true","sidecar.istio.io/inject":"false"}` |
+| image.repository                 | Image repository                                | `ghcr.io/webengineeringgroupi/backend`                                                                                                                        |
+| image.tag                        | Image tag                                       | `master`                                                                                                                                                      |
+| image.pullPolicy                 | Image Pull Policy (Always, IfNotPresent, Never) | `Always`                                                                                                                                                      |
+| service.http.create              | Whether to create or not the HTTP service       | `true`                                                                                                                                                        |
+| service.http.type                | Type for the service for the HTTP backend       | `ClusterIP`                                                                                                                                                   |
+| service.http.port                | Port for the HTTP endpoint                      | `8080`                                                                                                                                                        |
+| service.grpc.create              | Whether to create or not the gRPC service       | `true`                                                                                                                                                        |
+| service.grpc.type                | Type of the service for the gRPC backend        | `ClusterIP`                                                                                                                                                   |
+| service.grpc.port                | Port for the gRPC endpoint                      | `8081`                                                                                                                                                        |
+| database.deploy                  | Whether to deploy or not the postgres database  | `true`                                                                                                                                                        |
+| database.postgresqlUsername      | User for the database                           | `postgres`                                                                                                                                                    |
+| database.postgresqlPassword      | Password for the database                       | `""`                                                                                                                                                          |
+| database.postgresqlDatabase      | Name of the database                            | `postgres`                                                                                                                                                    |
+| database.postgresqlHost          | Service of the postgres database                | ``                                                                                                                                                            |
+| database.ssl_mode                | SSL mode of the Postgres DB                     | `disable`                                                                                                                                                     |
+| database.service.port            | Port of the database                            | `5432`                                                                                                                                                        |
+| integrations.safebrowsing.apiKey | API Key for the Google SafeBrowsing integration | ``                                                                                                                                                            |
+| ingress.http.enabled             | Whether to deploy the HTTP ingress or not       | `true`                                                                                                                                                        |
+| ingress.http.hosts               | Host setting for the HTTP ingress               | `[""]`                                                                                                                                                        |
+| ingress.http.paths               | Paths to match for the HTTP ingress             | `[{"path":"/","type":"Prefix"}]`                                                                                                                              |
+| ingress.http.extra_annotations   | Extra annotations for the HTTP ingress          | `{}`                                                                                                                                                          |
+| ingress.grpc.enabled             | Whether to deploy the gRPC ingress or not       | `true`                                                                                                                                                        |
+| ingress.grpc.hosts               | Host setting for the gRPC ingress               | `[""]`                                                                                                                                                        |
+| ingress.grpc.paths               | Paths to match for the gRPC ingress             | `[{"path":"/","type":"Prefix"}]`                                                                                                                              |
+| ingress.grpc.extra_annotations   | Extra annotations for the gRPC ingress          | `{}`                                                                                                                                                          |
 
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
