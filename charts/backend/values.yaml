@@ -87,3 +87,10 @@ ingress:
     extra_annotations: {}
     # TLS configurations for the gRPC ingress
     tls: []
+
+monitoring:
+  podMonitor:
+    # Defines if the PodMonitor should be deployed to monitor the backend metrics.
+    # It depends on the `monitoring.coreos.com/v1` `PodMonitor` resource.
+    # If this CRD is not present in the cluster, the PodMonitor won't be deployed.
+    enabled: true
