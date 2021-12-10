@@ -3,6 +3,25 @@ entries:
   backend:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2021-12-10T19:00:32.550437604Z"
+    dependencies:
+    - alias: database
+      condition: database.deploy
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~10.13.8
+    description: Backend for the Web Engineering Group I project
+    digest: c5593835d95d1a9b642a9db85699f3ff97c985cf27d438fd869c790980de5cf0
+    maintainers:
+    - email: fede.barcelona@sysdig.com
+      name: tembleking
+    name: backend
+    type: application
+    urls:
+    - https://github.com/WebEngineeringGroupI/charts/releases/download/backend-0.0.11/backend-0.0.11.tgz
+    version: 0.0.11
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2021-12-06T12:24:23.792135181Z"
     dependencies:
     - alias: database
@@ -199,4 +218,4 @@ entries:
     urls:
     - https://github.com/WebEngineeringGroupI/charts/releases/download/frontend-0.0.1/frontend-0.0.1.tgz
     version: 0.0.1
-generated: "2021-12-06T12:24:23.792726589Z"
+generated: "2021-12-10T19:00:32.550482304Z"
