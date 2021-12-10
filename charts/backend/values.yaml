@@ -28,6 +28,8 @@ service:
     type: ClusterIP
     # Port for the HTTP endpoint
     port: 8080
+    # Annotations for the HTTP service
+    annotations:
   grpc:
     # Whether to create or not the gRPC service
     create: true
@@ -35,6 +37,8 @@ service:
     type: ClusterIP
     # Port for the gRPC endpoint
     port: 8081
+    # Annotations for the gRPC service
+    annotations:
 
 database:
   # Whether to deploy or not the postgres database
