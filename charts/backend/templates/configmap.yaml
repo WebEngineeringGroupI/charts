@@ -7,3 +7,11 @@ data:
   database_name: {{ .Values.database.postgresqlDatabase }}
   database_ssl_mode: {{ .Values.database.ssl_mode }} # (disable, allow, prefer, require, verify-ca, verify-full) https://www.postgresql.org/docs/9.1/libpq-ssl.html
   base_hostname: {{ .Values.base_hostname }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-rabbitmq
+data:
+  host:  {{ required "A valid rabbitmq.host is required" .Values.rabbitmq.host | quote }}
+  port:  {{ .Values.rabbitmq.port | quote }}

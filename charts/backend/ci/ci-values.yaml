@@ -4,3 +4,8 @@ database:
 integrations:
   safebrowsing:
     apiKey: api-key
+
+rabbitmq:
+  username: foo
+  password: bar
+  host: baz

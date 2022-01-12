@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-validator
+  labels:
+    app: {{ .Release.Name }}-validator
+spec:
+  replicas: {{ .Values.validator.deployment.replicas }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}-validator
+      {{- with .Values.validator.deployment.podAnnotations }}
+      annotations: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Release.Name }}-validator
+    spec:
+      containers:
+        - name: validator
+          image: {{ .Values.validator.image.repository }}:{{ .Values.validator.image.tag }}
+          imagePullPolicy: {{ .Values.validator.image.pullPolicy }}
+          env:
+            {{- include "urlshortener.rabbitmq.envvars" . | nindent 12 }}
+            - name: SAFE_BROWSING_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-google-safe-browsing
+                  key: apiKey
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-validator

@@ -36,33 +36,7 @@ spec:
               value: database/migrate
             - name: REF
               value: {{ .Values.image.tag }}
-            - name: DB_PORT
-              value: {{ .Values.database.service.port | quote }}
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-backend-database
-                  key: username
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-backend-database
-                  key: password
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_host
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_name
-            - name: DB_SSL_MODE
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_ssl_mode
+      {{- include "urlshortener.database.envvars" . | nindent 12 }}
       containers:
         - name: backend
           ports:
@@ -73,38 +47,8 @@ spec:
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: DB_PORT
-              value: {{ .Values.database.service.port | quote }}
-            - name: DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-backend-database
-                  key: username
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-backend-database
-                  key: password
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_host
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_name
-            - name: DB_SSL_MODE
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-backend
-                  key: database_ssl_mode
-            - name: SAFE_BROWSING_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Release.Name }}-google-safe-browsing
-                  key: apiKey
+            {{- include "urlshortener.database.envvars" . | nindent 12 }}
+            {{- include "urlshortener.rabbitmq.envvars" . | nindent 12 }}
             - name: BASE_DOMAIN
               valueFrom:
                 configMapKeyRef:
