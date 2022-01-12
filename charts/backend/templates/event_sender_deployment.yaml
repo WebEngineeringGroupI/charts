@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-event-sender
+  labels:
+    app: {{ .Release.Name }}-event-sender
+spec:
+  replicas: {{ .Values.event_sender.deployment.replicas }}
+  template:
+    metadata:
+      name: {{ .Release.Name }}-event-sender
+      {{- with .Values.event_sender.deployment.podAnnotations }}
+      annotations: {{ toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Release.Name }}-event-sender
+    spec:
+      containers:
+        - name: event-sender
+          image: {{ .Values.event_sender.image.repository }}:{{ .Values.event_sender.image.tag }}
+          imagePullPolicy: {{ .Values.event_sender.image.pullPolicy }}
+          env:
+            {{- include "urlshortener.database.envvars" . | nindent 12 }}
+            {{- include "urlshortener.rabbitmq.envvars" . | nindent 12 }}
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-event-sender

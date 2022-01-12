@@ -12,6 +12,38 @@ deployment:
     prometheus.io/scheme: "http"
     sidecar.istio.io/inject: "false"
 
+event_sender:
+  deployment:
+    # Number of replicas for the event sender
+    replicas: 1
+    # Pod annotations for the event sender
+    podAnnotations:  # +doc-gen:break
+
+
+  image:
+    # Image repository
+    repository: ghcr.io/webengineeringgroupi/urlshortener_event_sender
+    # Image tag
+    tag: master
+    # Image Pull Policy (Always, IfNotPresent, Never)
+    pullPolicy: Always
+
+validator:
+  deployment:
+    # Number of replicas for the validator
+    replicas: 1
+    # Pod annotations for the validator
+    podAnnotations:  # +doc-gen:break
+
+  image:
+    # Image repository
+    repository: ghcr.io/webengineeringgroupi/validator
+    # Image tag
+    tag: master
+    # Image Pull Policy (Always, IfNotPresent, Never)
+    pullPolicy: Always
+
+
 image:
   # Image repository
   repository: ghcr.io/webengineeringgroupi/backend
@@ -57,6 +89,16 @@ database:
     # Port of the database
     port: 5432
 
+rabbitmq:
+  # Address of the RabbitMQ instance
+  host:
+  # Port of the RabbitMQ instance
+  port: 5672
+  # Username of the RabbitMQ instance
+  username:
+  # Password of the RabbitMQ instance
+  password:
+
 integrations:
   safebrowsing:
     # API Key for the Google SafeBrowsing integration
@@ -82,7 +124,7 @@ ingress:
     enabled: true
     # Host setting for the gRPC ingress
     hosts:  # +doc-gen:break
-    - ""
+      - ""
     # Paths to match for the gRPC ingress
     paths:  # +doc-gen:break
       - path: /

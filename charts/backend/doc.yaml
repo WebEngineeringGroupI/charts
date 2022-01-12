@@ -11,7 +11,7 @@ chart:
   name: backend
   #  version: v0.9.0-rc.0
   #  values: "-- generate from values file --"
-  valuesExample: "database.postgresqlPassword=YOUR-PASSWORD-HERE,integrations.safebrowsing.apiKey=YOUR-SAFEBROWSING-API-HERE"
+  valuesExample: "database.postgresqlPassword=YOUR-PASSWORD-HERE,integrations.safebrowsing.apiKey=YOUR-SAFEBROWSING-API-HERE,rabbitmq.username=USERNAME,rabbitmq.password=PASSWORD,rabbitmq.host=RABBITMQ_HOST"
 prerequisites:
   - "Kubernetes v1.16+"
   - "A Google SafeBrowsing API key"
